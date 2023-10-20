@@ -1,13 +1,13 @@
 import React, { useState } from "react";
-import {useNavigate} from 'react-router-dom'
+import { useNavigate } from "react-router-dom";
 import {
   Button,
   FormControl,
   FormGroup,
   Input,
   InputLabel,
-  Typography,
   styled,
+  Typography,
 } from "@mui/material";
 import { addUser } from "../service/api";
 
@@ -21,32 +21,31 @@ const FormContainer = styled(FormGroup)`
 `;
 
 export default function AddUser() {
-  
-  const [formData,setFormData] = useState({
-    name:"",
-    username:"",
-    email:"",
-    phone:"" 
-  })
+  const [formData, setFormData] = useState({
+    name: "",
+    username: "",
+    email: "",
+    phone: "",
+  });
 
   //useNavigate  returns a  function when we call it we need to pass an argument(URL to navigate)
   const navigate = useNavigate();
 
   function handleChange(event) {
     // console.log(event.target.name, event.target.value)
-    setFormData(formData => ({
+    setFormData((formData) => ({
       ...formData,
-      [event.target.name]:event.target.value
-    }))
+      [event.target.name]: event.target.value,
+    }));
   }
 
   // function addUserDetails(){
   //   addUser(formData);
   // }
   //converting above to async await too.
-  async function addUserDetails(){
+  async function addUserDetails() {
     await addUser(formData);
-    navigate('/all')
+    navigate("/all");
   }
 
   return (
@@ -70,7 +69,9 @@ export default function AddUser() {
         <Input name="phone" onChange={(event) => handleChange(event)} />
       </FormControl>
       <FormControl>
-        <Button variant="contained" onClick={()=> addUserDetails()}>Add User</Button>
+        <Button variant="contained" onClick={() => addUserDetails()}>
+          Add User
+        </Button>
       </FormControl>
     </FormContainer>
   );
